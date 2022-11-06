@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <TargetFramework>net6.0</TargetFramework>
+      <Authors>light-traveller</Authors>
+      <Description>A throw helper library for .NET</Description>
+      <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <NeutralLanguage>en</NeutralLanguage>
+      <Nullable>enable</Nullable>
+      <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+      <PackageProjectUrl>https://github.com/light-traveller/Guards</PackageProjectUrl>
+      <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+      <PackageTags>dotnet;clean-code;guard;throw-helper;dotnet-core;</PackageTags>
+      <RepositoryType>git</RepositoryType>
+      <RepositoryUrl>https://github.com/light-traveller/Guards</RepositoryUrl>
+      <Title>LightTraveller.Guards</Title>
+  </PropertyGroup>
+
+</Project>
