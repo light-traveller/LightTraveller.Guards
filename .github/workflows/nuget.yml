@@ -13,10 +13,12 @@ jobs:
   semantic-version:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+    outputs:
+      - semver: ${{ steps.semver.outputs.semver }}
 
     steps:
-    - name: Set SEM_VER variable from tag      
-      run: echo "SEM_VER=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+    - id: semver
+      run: echo "semver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
   build:
     if: startsWith(github.ref, 'refs/tags/')
@@ -26,7 +28,7 @@ jobs:
     - uses: actions/checkout@v3
         
     - name: Debug SEM_VER
-      run: echo 'DEBUG SEM_VER:'${SEM_VER}
+      run: echo 'DEBUG SEM_VER:'${{ needs.semantic-version.outputs.semver }}
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -37,7 +39,7 @@ jobs:
       run: dotnet restore
     
     - name: Build
-      run: dotnet build -c Release --no-restore /p:Version=${SEM_VER}
+      run: dotnet build -c Release --no-restore /p:Version=${{ needs.semantic-version.outputs.semver }}
     
   unit-test:
     needs: build
@@ -53,7 +55,7 @@ jobs:
 
     steps:
     - name: Pack nuget
-      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${SEM_VER}
+      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ needs.semantic-version.outputs.semver }}
     
   upload:
     needs: pack
