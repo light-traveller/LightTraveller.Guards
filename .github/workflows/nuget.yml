@@ -16,7 +16,13 @@ jobs:
     outputs:
       semver: ${{ steps.semver.outputs.semver }}
 
-    steps:
+    steps:    
+    - name: debug 'GITHUB_REF/refs\/tags\/v/'
+      run: echo ${GITHUB_REF/refs\/tags\/v/} 
+
+    - name: debug 'GITHUB_REF/refs\/tags\/'
+      run: echo ${GITHUB_REF/refs\/tags\/} 
+
     - id: semver
       run: echo "semver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
 
