@@ -51,6 +51,7 @@ jobs:
     needs: [unit-test, semantic-version]
     runs-on: ubuntu-latest
 
+    steps:
     - name: Pack nuget
       run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${SEM_VER}
     
@@ -58,6 +59,7 @@ jobs:
     needs: pack
     runs-on: ubuntu-latest
 
+    steps:
     - name: Upload to nuget.org
       #if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
       run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
