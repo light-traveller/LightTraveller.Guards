@@ -31,7 +31,7 @@ jobs:
     - uses: actions/checkout@v3
         
     - name: Debug SEM_VER
-      run: echo 'DEBUG SEM_VER:'${{ needs.semantic-version.outputs.semver }}
+      run: echo '${{ needs.semantic-version.outputs.semver }}'
     
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
@@ -60,11 +60,11 @@ jobs:
     - name: Pack nuget
       run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ needs.semantic-version.outputs.semver }}
     
-  upload:
-    needs: pack
-    runs-on: ubuntu-latest
+  #upload:
+  #  needs: pack
+  #  runs-on: ubuntu-latest
 
-    steps:
-    - name: Upload to nuget.org
-      #if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
-      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
+  #  steps:
+  #  - name: Upload to nuget.org
+  #    #if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
+  #    run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
