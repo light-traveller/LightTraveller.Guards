@@ -16,12 +16,14 @@ public void CalculatePayableAmount(Order order, decimal lastPaidAmount, long sto
 
     if (lastPaidAmount < 0)
     {
-        throw new ArgumentException("The decimal parameter cannot be negative.", nameof(prevPaymentAmount));
+        throw new ArgumentException("The decimal parameter cannot be negative.",
+                                    nameof(prevPaymentAmount));
     }
 
     if (storeId <= 0)
     {
-        throw new ArgumentException("The long parameter cannot be negative.", nameof(storeId));
+        throw new ArgumentException("The long parameter cannot be negative.", 
+                                    nameof(storeId));
     }
 
     //...
