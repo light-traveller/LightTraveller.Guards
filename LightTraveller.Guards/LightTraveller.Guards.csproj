@@ -3,7 +3,7 @@
   <PropertyGroup>
       <TargetFramework>net6.0</TargetFramework>
       <Authors>light-traveller</Authors>
-      <Description>A throw helper library for .NET</Description>
+      <Description>A throw helper (guard) library for .NET</Description>
       <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
       <ImplicitUsings>enable</ImplicitUsings>
       <NeutralLanguage>en</NeutralLanguage>
