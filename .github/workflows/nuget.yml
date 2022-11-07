@@ -5,67 +5,35 @@ on:
     branches: 'master'
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-  #pull_request:
-  #  branches: [ 'master' ]
 
-jobs:
-    
-  semantic-version:
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    outputs:
-      semver: ${{ steps.semver.outputs.semver }}
+jobs:  
+  publish-nuget:
 
-    steps:    
-    - name: debug 'GITHUB_REF/refs\/tags\/v/'
-      run: echo ${GITHUB_REF/refs\/tags\/v/}       
-
-    - id: semver
-      run: echo "semver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_OUTPUT
-
-  build:
-    needs: semantic-version
-    if: startsWith(github.ref, 'refs/tags/')
+    if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-        
-    - name: Debug SEM_VER
-      run: echo '${{ needs.semantic-version.outputs.semver }}'
-    
+
+    - name: Debug 'GITHUB_REF/refs\/tags\/v/'
+      run: echo ${GITHUB_REF/refs\/tags\/v/}
+
+    - name: SemVer
+      run: echo "semver=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    
+
     - name: Restore dependencies
       run: dotnet restore
     
     - name: Build
-      run: dotnet build -c Release --no-restore /p:Version=${{ needs.semantic-version.outputs.semver }}
-    
-  unit-test:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-    - name: Run tests
-      run: dotnet test -c Release --no-build --verbosity normal
-  
-  pack:
-    needs: [unit-test, semantic-version]
-    runs-on: ubuntu-latest
+      run: dotnet build -c Release --no-restore /p:Version=${{ env.semver }}
 
-    steps:
     - name: Pack nuget
-      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ needs.semantic-version.outputs.semver }}
+      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ env.semver }}
     
-  #upload:
-  #  needs: pack
-  #  runs-on: ubuntu-latest
-
-  #  steps:
-  #  - name: Upload to nuget.org
-  #    #if: github.ref_type == 'tag' && startsWith(github.ref, 'refs/tags/v')
-  #    run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
+    - name: Upload to nuget.org
+      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
