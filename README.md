@@ -18,7 +18,7 @@ public class TicketService
         if (repository is null)
             throw new ArgumentNullException(nameof(repository));
 
-        if(validator is null)
+        if (validator is null)
             throw new ArgumentNullException(nameof(validator));
 
         if (userService is null)
