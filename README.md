@@ -7,26 +7,27 @@ The following method
 ```c#
 using LightTraveller.Guards;
 
-public void CalculatePayableAmount(Order order, decimal lastPaidAmount, long storeId)
+public class TicketService
 {
-    if (order is null)
-    {
-        throw new ArgumentNullException(nameof(order));
-    }
+    private readonly TicketRepository _repository;
+    private readonly TicketValidator _validator;
+    private readonly UserService _userService;
 
-    if (lastPaidAmount < 0)
+    public TicketService(TicketRepository repository, TicketValidator validator, UserService userService)
     {
-        throw new ArgumentException("The decimal parameter cannot be negative.",
-                                    nameof(prevPaymentAmount));
-    }
+        if (repository is null)
+            throw new ArgumentNullException(nameof(repository));
 
-    if (storeId <= 0)
-    {
-        throw new ArgumentException("The long parameter cannot be negative.", 
-                                    nameof(storeId));
-    }
+        if(validator is null)
+            throw new ArgumentNullException(nameof(validator));
 
-    //...
+        if (userService is null)
+            throw new ArgumentNullException(nameof(userService));
+
+        _repository = repository;
+        _validator = validator; 
+        _userService = userService;
+    }
 }
 ```
 can be rewritten as
@@ -34,18 +35,24 @@ can be rewritten as
 ```c#
 using LightTraveller.Guards;
 
-public void CalculatePayableAmount(Order order, decimal lastPaidAmount, long storeId)
+public class TicketService
 {
-    order = Guard.Null(order);
-    lastPaidAmount = Guard.Negative(lastPaidAmount);
-    storeId = Guard.ZeroOrNegative(storeId);
+    private readonly TicketRepository _repository;
+    private readonly TicketValidator _validator;
+    private readonly UserService _userService;
 
-    //...
+    public TicketService(TicketRepository repository, TicketValidator validator, UserService userService)
+    {
+        _repository = Guard.Null(repository);
+        _validator = Guard.Null(validator);
+        _userService = Guard.Null(userService);
+    }
 }
 ```
 
 ### Notice 
-> As you can see in the example above, when using **Guards** library, you do not need to pass the name of the arguments, e.g., ```nameof(order)``` or ```"order"```, 
+> As you can see in the example above, when using **Guards** library, 
+you do not need to pass the name of the arguments, e.g., ```nameof(repository)``` or ```"repository"```, 
 to the guard methods to be used for throwing exceptions. 
 This is taken care of by using 
 [```[CallerArgumentExpression]```](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute?view=net-6.0) 
