@@ -1,5 +1,5 @@
 ﻿using LightTraveller.Guards;
-using static LightTraveller.Guards.ExceptionMessages;
+using static LightTraveller.Guards.Messages;
 
 namespace LightTraveller.Guards.UnitTests;
 
