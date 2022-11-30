@@ -10,23 +10,24 @@ using LightTraveller.Guards;
 public class TicketService
 {
     private readonly TicketRepository _repository;
-    private readonly TicketValidator _validator;
     private readonly UserService _userService;
+    private readonly TicketValidator _validator;
+    
 
-    public TicketService(TicketRepository repository, TicketValidator validator, UserService userService)
+    public TicketService(TicketRepository repository, UserService userService, TicketValidator validator)
     {
         if (repository is null)
             throw new ArgumentNullException(nameof(repository));
 
-        if (validator is null)
-            throw new ArgumentNullException(nameof(validator));
-
         if (userService is null)
             throw new ArgumentNullException(nameof(userService));
 
+        if (validator is null)
+            throw new ArgumentNullException(nameof(validator));
+        
         _repository = repository;
-        _validator = validator; 
         _userService = userService;
+        _validator = validator; 
     }
 }
 ```
@@ -38,18 +39,20 @@ using LightTraveller.Guards;
 public class TicketService
 {
     private readonly TicketRepository _repository;
-    private readonly TicketValidator _validator;
     private readonly UserService _userService;
+    private readonly TicketValidator _validator;
+    
 
-    public TicketService(TicketRepository repository, TicketValidator validator, UserService userService)
+    public TicketService(TicketRepository repository, UserService userService, TicketValidator validator)
     {
-        _repository = Guard.Null(repository);
-        _validator = Guard.Null(validator);
+        _repository = Guard.Null(repository);        
         _userService = Guard.Null(userService);
+
+        // An overload accepting a custom exception message
+        _validator = Guard.Null(validator, "Make sure the passed argument is not null.");
     }
 }
 ```
-
 ### Notice 
 > As you can see in the example above, when using **Guards** library, 
 you do not need to pass the name of the arguments, e.g., ```nameof(repository)``` or ```"repository"```, 
@@ -57,7 +60,6 @@ to the guard methods to be used for throwing exceptions.
 This is taken care of by using 
 [```[CallerArgumentExpression]```](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.callerargumentexpressionattribute?view=net-6.0) 
 attribute in the the methods of the ```Guard``` class.
-
 ___
 
 ## Installation
