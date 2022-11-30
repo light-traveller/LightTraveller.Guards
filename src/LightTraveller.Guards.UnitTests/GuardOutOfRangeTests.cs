@@ -1,6 +1,5 @@
-﻿using LightTraveller.Guards;
-
-namespace LightTraveller.Guards.UnitTests;
+﻿namespace LightTraveller.Guards.UnitTests;
+using static LightTraveller.Guards.UnitTests.TestHelpers;
 
 public class GuardOutOfRangeTests
 {
@@ -16,6 +15,22 @@ public class GuardOutOfRangeTests
     {
         var value = 20;
         _ = Assert.Throws<ArgumentOutOfRangeException>(() => _ = Guard.OutOfRange(value, 2, 12));
+    }
+
+    [Fact]
+    public void WithLessThanMinvalueAndCustomMessage_GuardOutOfRange_Should_ThrowArgumentOutOfRangeExceptionWithCustomMessage()
+    {
+        var value = 0;
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => _ = Guard.OutOfRange(value, 2, 12, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(value)), exception.Message);
+    }
+
+    [Fact]
+    public void WithGreaterThanMaxValueAndCustomMessage_GuardOutOfRange_Should_ThrowArgumentOutOfRangeExceptionWithCustomMessage()
+    {
+        var value = 20;
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => _ = Guard.OutOfRange(value, 2, 12, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(value)), exception.Message);
     }
 
     [Theory]

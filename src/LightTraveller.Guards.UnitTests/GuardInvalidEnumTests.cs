@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel;
-using LightTraveller.Guards;
+using static LightTraveller.Guards.UnitTests.TestHelpers;
 
 namespace LightTraveller.Guards.UnitTests;
 
@@ -13,6 +13,17 @@ public class GuardInvalidEnumTests
         var value = 0;
         _ = Assert.Throws<InvalidEnumArgumentException>(() => _ = Guard.InvalidEnumValue((TestEnum)value));
         _ = Assert.Throws<InvalidEnumArgumentException>(() => _ = Guard.InvalidEnumValue<TestEnum>(value));
+    }
+
+    [Fact]
+    public void WithInvalidEnumValuesAndCustomMessage_GuardInvalidEnumValues_Should_ThrowInvalidEnumArgumentExceptionWithCustomMessage()
+    {
+        var value = 0;
+        var exception = Assert.Throws<InvalidEnumArgumentException>(() => _ = Guard.InvalidEnumValue((TestEnum)value, CUSTOM_MESSAGE));
+        Assert.Equal(CUSTOM_MESSAGE, exception.Message);
+
+        exception = Assert.Throws<InvalidEnumArgumentException>(() => _ = Guard.InvalidEnumValue<TestEnum>(value, CUSTOM_MESSAGE));
+        Assert.Equal(CUSTOM_MESSAGE, exception.Message);
     }
 
     [Fact]

@@ -1,4 +1,6 @@
-﻿namespace LightTraveller.Guards.UnitTests;
+﻿using static LightTraveller.Guards.UnitTests.TestHelpers;
+
+namespace LightTraveller.Guards.UnitTests;
 
 public class GuardEmptyStringTests
 {
@@ -10,10 +12,26 @@ public class GuardEmptyStringTests
     }
 
     [Fact]
+    public void WithEmptyStringAndCustomMessage_GuradEmpty_Should_ThrowArgumentExpetionWithCustomMessage()
+    {
+        const string EMPTY_STRING = "";
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Empty(EMPTY_STRING, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(EMPTY_STRING)), exception.Message);
+    }
+
+    [Fact]
     public void WithNullString_GuradEmpty_Should_ThrowArgumentNullExpetion()
     {
         string? nullString = null;
         _ = Assert.Throws<ArgumentNullException>(() => _ = Guard.Empty(nullString));
+    }
+
+    [Fact]
+    public void WithNullStringAndCustomMessage_GuradEmpty_Should_ThrowArgumentNullExpetionWithCustomMessage()
+    {
+        string? nullString = null;
+        var exception = Assert.Throws<ArgumentNullException>(() => _ = Guard.Empty(nullString, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(nullString)), exception.Message);
     }
 
     [Fact]

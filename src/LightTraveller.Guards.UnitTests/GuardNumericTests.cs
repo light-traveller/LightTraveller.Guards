@@ -1,5 +1,5 @@
-﻿using LightTraveller.Guards;
-using static LightTraveller.Guards.Messages;
+﻿using static LightTraveller.Guards.Messages;
+using static LightTraveller.Guards.UnitTests.TestHelpers;
 
 namespace LightTraveller.Guards.UnitTests;
 
@@ -15,19 +15,44 @@ public class GuardNumericTests
         var zeroDecimal = (decimal)zeroInt;
 
         var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroInt));
-        Assert.StartsWith(string.Format(IntegerZero, nameof(zeroInt)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Zero, nameof(zeroInt)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroLong));
-        Assert.StartsWith(string.Format(LongZero, nameof(zeroLong)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Zero, nameof(zeroLong)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroFloat));
-        Assert.StartsWith(string.Format(FloatZero, nameof(zeroFloat)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Zero, nameof(zeroFloat)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroDouble));
-        Assert.StartsWith(string.Format(DoubleZero, nameof(zeroDouble)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Zero, nameof(zeroDouble)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroDecimal));
-        Assert.StartsWith(string.Format(DecimalZero, nameof(zeroDecimal)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Zero, nameof(zeroDecimal)), exception.Message);
+    }
+
+    [Fact]
+    public void WithZeroAndCustomMessage_GuardZero_Should_ThrowArgumentExceptionWithCustomMessage()
+    {
+        var zeroInt = 0;
+        var zeroLong = (long)zeroInt;
+        var zeroFloat = (float)zeroInt;
+        var zeroDouble = (double)zeroInt;
+        var zeroDecimal = (decimal)zeroInt;
+
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroInt, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(zeroInt)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroLong, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(zeroLong)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroFloat, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(zeroFloat)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroDouble, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(zeroDouble)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Zero(zeroDecimal, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(zeroDecimal)), exception.Message);
     }
 
     [Theory]
@@ -52,19 +77,44 @@ public class GuardNumericTests
         var negDecimal = (decimal)negInt;
 
         var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negInt));
-        Assert.StartsWith(string.Format(IntegerNegative, nameof(negInt)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Negative, nameof(negInt)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negLong));
-        Assert.StartsWith(string.Format(LongNegative, nameof(negLong)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Negative, nameof(negLong)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negFloat));
-        Assert.StartsWith(string.Format(FloatNegative, nameof(negFloat)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Negative, nameof(negFloat)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negDouble));
-        Assert.StartsWith(string.Format(DoubleNegative, nameof(negDouble)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Negative, nameof(negDouble)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negDecimal));
-        Assert.StartsWith(string.Format(DecimalNegative, nameof(negDecimal)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Negative, nameof(negDecimal)), exception.Message);
+    }
+
+    [Fact]
+    public void WithNegativeNumbersAndCustomMessage_GuradNegative_Should_ThrowArgumentExceptionWithCustomMessage()
+    {
+        var negInt = -1;
+        var negLong = (long)negInt;
+        var negFloat = (float)negInt;
+        var negDouble = (double)negInt;
+        var negDecimal = (decimal)negInt;
+
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negInt, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(negInt)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negLong, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(negLong)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negFloat, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(negFloat)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negDouble, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(negDouble)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Negative(negDecimal, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(negDecimal)), exception.Message);
     }
 
     [Theory]
@@ -90,19 +140,45 @@ public class GuardNumericTests
         var decimalInput = (decimal)input;
 
         var exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(input));
-        Assert.StartsWith(string.Format(IntegerZeroOrNegative, nameof(input)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrNegative, nameof(input)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(longInput));
-        Assert.StartsWith(string.Format(LongZeroOrNegative, nameof(longInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrNegative, nameof(longInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(floatInput));
-        Assert.StartsWith(string.Format(FloatZeroOrNegative, nameof(floatInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrNegative, nameof(floatInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(doubleInput));
-        Assert.StartsWith(string.Format(DoubleZeroOrNegative, nameof(doubleInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrNegative, nameof(doubleInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(decimalInput));
-        Assert.StartsWith(string.Format(DecimalZeroOrNegative, nameof(decimalInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrNegative, nameof(decimalInput)), exception.Message);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    public void WithZeroOrNegativeNumbersAndCustomMessage_GuradZeroOrNegative_Should_ThrowArgumentExceptionWithCustomMessage(int input)
+    {
+        var longInput = (long)input;
+        var floatInput = (float)input;
+        var doubleInput = (double)input;
+        var decimalInput = (decimal)input;
+
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(input, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(input)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(longInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(longInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(floatInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(floatInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(doubleInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(doubleInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrNegative(decimalInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(decimalInput)), exception.Message);
     }
 
     [Fact]
@@ -119,26 +195,51 @@ public class GuardNumericTests
     [Fact]
     public void WithPositiveNumber_GuradPositive_Should_ThrowArgumentException()
     {
-        var posInt = 1;        
+        var posInt = 1;
         var posLong = (long)posInt;
         var posFloat = (float)posInt;
         var posDouble = (double)posInt;
         var posDecimal = (decimal)posInt;
 
         var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posInt));
-        Assert.StartsWith(string.Format(IntegerPositive, nameof(posInt)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Positive, nameof(posInt)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posLong));
-        Assert.StartsWith(string.Format(LongPositive, nameof(posLong)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Positive, nameof(posLong)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posFloat));
-        Assert.StartsWith(string.Format(FloatPositive, nameof(posFloat)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Positive, nameof(posFloat)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posDouble));
-        Assert.StartsWith(string.Format(DoublePositive, nameof(posDouble)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Positive, nameof(posDouble)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posDecimal));
-        Assert.StartsWith(string.Format(DecimalPositive, nameof(posDecimal)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(Positive, nameof(posDecimal)), exception.Message);
+    }
+
+    [Fact]
+    public void WithPositiveNumberAndCustomMessage_GuradPositive_Should_ThrowArgumentExceptionWithCustomMessage()
+    {
+        var posInt = 1;
+        var posLong = (long)posInt;
+        var posFloat = (float)posInt;
+        var posDouble = (double)posInt;
+        var posDecimal = (decimal)posInt;
+
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posInt, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(posInt)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posLong, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(posLong)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posFloat, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(posFloat)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posDouble, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(posDouble)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.Positive(posDecimal, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(posDecimal)), exception.Message);
     }
 
     [Theory]
@@ -164,19 +265,45 @@ public class GuardNumericTests
         var decimalInput = (decimal)input;
 
         var exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(input));
-        Assert.StartsWith(string.Format(IntegerZeroOrPositive, nameof(input)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrPositive, nameof(input)) , exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(longInput));
-        Assert.StartsWith(string.Format(LongZeroOrPositive, nameof(longInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrPositive, nameof(longInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(floatInput));
-        Assert.StartsWith(string.Format(FloatZeroOrPositive, nameof(floatInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrPositive, nameof(floatInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(doubleInput));
-        Assert.StartsWith(string.Format(DoubleZeroOrPositive, nameof(doubleInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrPositive, nameof(doubleInput)), exception.Message);
 
         exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(decimalInput));
-        Assert.StartsWith(string.Format(DecimalZeroOrPositive, nameof(decimalInput)), exception.Message, StringComparison.InvariantCulture);
+        Assert.Equal(GetMessage(ZeroOrPositive, nameof(decimalInput)), exception.Message);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    public void WithZeroOrPositiveNumberAndCustomMessage_GuradZeroOrPositive_Should_ThrowArgumentExceptionWithCustomMessage(int input)
+    {
+        var longInput = (long)input;
+        var floatInput = (float)input;
+        var doubleInput = (double)input;
+        var decimalInput = (decimal)input;
+
+        var exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(input, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(input)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(longInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(longInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(floatInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(floatInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(doubleInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(doubleInput)), exception.Message);
+
+        exception = Assert.Throws<ArgumentException>(() => _ = Guard.ZeroOrPositive(decimalInput, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(decimalInput)), exception.Message);
     }
 
     [Fact]
