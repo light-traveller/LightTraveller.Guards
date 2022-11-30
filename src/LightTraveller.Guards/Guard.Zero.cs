@@ -15,7 +15,7 @@ public partial class Guard
     public static int Zero(int param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param == 0)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(IntegerZero, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Zero), expression);
 
         return param;
     }
@@ -30,7 +30,7 @@ public partial class Guard
     public static long Zero(long param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param == 0L)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(LongZero, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Zero), expression);
 
         return param;
     }
@@ -45,7 +45,7 @@ public partial class Guard
     public static float Zero(float param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param == 0F)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(FloatZero, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Zero), expression);
 
         return param;
     }
@@ -60,7 +60,7 @@ public partial class Guard
     public static double Zero(double param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param == 0D)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DoubleZero, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Zero), expression);
 
         return param;
     }
@@ -75,7 +75,7 @@ public partial class Guard
     public static decimal Zero(decimal param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param == 0M)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DecimalZero, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Zero), expression);
 
         return param;
     }

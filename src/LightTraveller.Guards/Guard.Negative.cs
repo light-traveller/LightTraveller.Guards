@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using static LightTraveller.Guards.Messages;
 
 namespace LightTraveller.Guards;
 
@@ -15,7 +14,7 @@ public partial class Guard
     public static int Negative(int param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param < 0)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(IntegerNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Negative), expression);
 
         return param;
     }
@@ -30,7 +29,7 @@ public partial class Guard
     public static long Negative(long param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param < 0L)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(LongNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Negative), expression);
 
         return param;
     }
@@ -45,7 +44,7 @@ public partial class Guard
     public static float Negative(float param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param < 0F)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(FloatNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Negative), expression);
 
         return param;
     }
@@ -60,7 +59,7 @@ public partial class Guard
     public static double Negative(double param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param < 0D)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DoubleNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Negative), expression);
 
         return param;
     }
@@ -75,7 +74,7 @@ public partial class Guard
     public static decimal Negative(decimal param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param < 0M)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DecimalNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Negative), expression);
 
         return param;
     }

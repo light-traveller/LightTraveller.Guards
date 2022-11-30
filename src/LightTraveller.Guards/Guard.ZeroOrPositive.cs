@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using static LightTraveller.Guards.Messages;
 
 namespace LightTraveller.Guards;
 
@@ -15,7 +14,7 @@ public partial class Guard
     public static int ZeroOrPositive(int param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param >= 0)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(IntegerZeroOrPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrPositive), expression);
 
         return param;
     }
@@ -30,7 +29,7 @@ public partial class Guard
     public static long ZeroOrPositive(long param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param >= 0L)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(LongZeroOrPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrPositive), expression);
 
         return param;
     }
@@ -45,7 +44,7 @@ public partial class Guard
     public static float ZeroOrPositive(float param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param >= 0F)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(FloatZeroOrPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrPositive), expression);
 
         return param;
     }
@@ -60,7 +59,7 @@ public partial class Guard
     public static double ZeroOrPositive(double param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param >= 0D)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DoubleZeroOrPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrPositive), expression);
 
         return param;
     }
@@ -75,7 +74,7 @@ public partial class Guard
     public static decimal ZeroOrPositive(decimal param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param >= 0M)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DecimalZeroOrPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrPositive), expression);
 
         return param;
     }

@@ -15,7 +15,7 @@ public partial class Guard
     public static int Positive(int param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param > 0)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(IntegerPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Positive), expression);
 
         return param;
     }
@@ -30,7 +30,7 @@ public partial class Guard
     public static long Positive(long param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param > 0L)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(LongPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Positive), expression);
 
         return param;
     }
@@ -45,7 +45,7 @@ public partial class Guard
     public static float Positive(float param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param > 0F)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(FloatPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Positive), expression);
 
         return param;
     }
@@ -60,7 +60,7 @@ public partial class Guard
     public static double Positive(double param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param > 0D)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DoublePositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Positive), expression);
 
         return param;
     }
@@ -75,7 +75,7 @@ public partial class Guard
     public static decimal Positive(decimal param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param > 0M)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DecimalPositive, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.Positive), expression);
 
         return param;
     }    

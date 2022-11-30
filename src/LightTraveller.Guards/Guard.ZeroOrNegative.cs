@@ -15,7 +15,7 @@ public partial class Guard
     public static int ZeroOrNegative(int param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param <= 0)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(IntegerZeroOrNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrNegative), expression);
 
         return param;
     }
@@ -30,7 +30,7 @@ public partial class Guard
     public static long ZeroOrNegative(long param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param <= 0L)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(LongZeroOrNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrNegative), expression);
 
         return param;
     }
@@ -45,7 +45,7 @@ public partial class Guard
     public static float ZeroOrNegative(float param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param <= 0F)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(FloatZeroOrNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrNegative), expression);
 
         return param;
     }
@@ -60,7 +60,7 @@ public partial class Guard
     public static double ZeroOrNegative(double param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param <= 0D)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DoubleZeroOrNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrNegative), expression);
 
         return param;
     }
@@ -75,7 +75,7 @@ public partial class Guard
     public static decimal ZeroOrNegative(decimal param, string? message = null, [CallerArgumentExpression("param")] string expression = "")
     {
         if (param <= 0M)
-            Helper.ArgumentException.Throw(message.IfEmptyThen(DecimalZeroOrNegative, expression), expression);
+            Helper.ArgumentException.Throw(message.IfEmptyThen(Messages.ZeroOrNegative), expression);
 
         return param;
     }
