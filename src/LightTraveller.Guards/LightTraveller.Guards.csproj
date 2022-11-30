@@ -9,11 +9,11 @@
       <NeutralLanguage>en</NeutralLanguage>
       <Nullable>enable</Nullable>
       <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
-      <PackageProjectUrl>https://github.com/light-traveller/Guards</PackageProjectUrl>
+      <PackageProjectUrl>https://github.com/light-traveller/LightTraveller.Guards</PackageProjectUrl>
       <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
       <PackageTags>dotnet;clean-code;guard;throw-helper;dotnet-core;</PackageTags>
       <RepositoryType>git</RepositoryType>
-      <RepositoryUrl>https://github.com/light-traveller/Guards</RepositoryUrl>
+      <RepositoryUrl>https://github.com/light-traveller/LightTraveller.Guards</RepositoryUrl>
       <Title>LightTraveller.Guards</Title>
   </PropertyGroup>
 
