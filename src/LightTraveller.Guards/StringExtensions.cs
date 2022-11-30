@@ -12,9 +12,4 @@ internal static class StringExtensions
     {
         return str.Empty() ? replacement : str;
     }
-
-    public static string IfEmptyThen(this string? str, string template, string replacement)
-    {
-        return str.Empty() ? string.Format(template, replacement) : str;
-    }
 }
