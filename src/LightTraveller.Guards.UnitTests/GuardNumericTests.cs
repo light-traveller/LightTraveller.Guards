@@ -316,4 +316,19 @@ public class GuardNumericTests
         Assert.Equal((double)input, Guard.ZeroOrPositive((double)input));
         Assert.Equal((decimal)input, Guard.ZeroOrPositive((decimal)input));
     }
+
+    [Fact]
+    public void WithIntPtrZero_GuardZeroPointer_Should_ThrowArgumentException()
+    {
+        var input = IntPtr.Zero;
+        var exception = Assert.Throws<ArgumentException>(() => Guard.ZeroPointer(input, CUSTOM_MESSAGE));
+        Assert.Equal(GetCustomMessage(nameof(input)), exception.Message);
+    }
+
+    [Fact]
+    public void WithNonZeroIntPtr_GuardZeroPointer_ShouldNot_Throw()
+    {
+        var input = new IntPtr(2);
+        Assert.Equal(input, Guard.ZeroPointer(input));
+    }
 }
