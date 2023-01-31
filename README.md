@@ -86,4 +86,5 @@ For a code sample, please look at the above example.
 8. ```Guard.ZeroOrPositive``` throws if the input is zero or positive.
 9. ```Guard.OutOfRange``` throws if the generic ```IComparable<T>``` input is out of the specified range.
 10. ```Guard.InvalidEnumValue``` throws if the input cannot be cast to a member of the specified enumeration.
+11. ```Guard.ZeroPointer``` throws if the input is IntPtr.Zero.
 
