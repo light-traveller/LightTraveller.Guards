@@ -1,4 +1,4 @@
-name: Nuget Release
+name: Nuget.org Release
 
 on:
   push:
