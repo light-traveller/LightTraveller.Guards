@@ -1,5 +1,5 @@
 # LightTraveller.Guards
-Using this throw helper (guard) library, you can skip typing boilerplate code to guard against unacceptable values of arguments passed to a method. 
+This throw helper (guard) library allows you to skip typing boilerplate code to guard against unacceptable arguments passed to a method. 
 This helps to produce a cleaner and more readable code
 ___
 ## Example: Checking for ```null```
