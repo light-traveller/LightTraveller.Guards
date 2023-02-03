@@ -5,6 +5,7 @@
       <Authors>light-traveller</Authors>
       <Description>A throw helper (guard) library for .NET</Description>
       <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
       <ImplicitUsings>enable</ImplicitUsings>
       <NeutralLanguage>en</NeutralLanguage>
       <Nullable>enable</Nullable>
