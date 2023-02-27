@@ -35,8 +35,8 @@ jobs:
     - name: Unit test
       run: dotnet test -c Release --no-build --no-restore --verbosity normal
 
-    - name: Pack nuget
-      run: dotnet pack -c Release --no-build --no-restore --output nupkgs /p:PackageVersion=${{ env.semver }}
+    - name: Pack nuget      
+      run: dotnet pack -c Release --no-build --no-restore /p:PackageVersion=${{ env.semver }}
     
     - name: Upload to nuget.org
-      run: dotnet nuget push nupkgs/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
+      run: dotnet nuget push **/bin/**/*.nupkg --api-key ${{secrets.NUGET_ORG}} --source https://api.nuget.org/v3/index.json
